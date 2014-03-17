@@ -22,4 +22,4 @@ Bash script to detect linux desktop environment name and version
 ## Tested in:
 
 * Knoppix 7.0.5
-* Lubuntu 13.04, 13.10
+* Lubuntu 12.04, 12.10, 13.04, 13.10
