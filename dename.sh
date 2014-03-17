@@ -80,7 +80,7 @@ function detect_lxde()
 	return 0
     fi
     # For Lubuntu
-    VERSION=`apt-get -s install lxde-core | grep 'Inst lxde-core' | awk -F '(' '{print $2}' | awk -F '-' '{print $1}'`
+    VERSION=`apt-cache show lxde-common | grep 'Version:' | awk '{print $2}' | awk -F '-' '{print $1}'`
     DESKTOP="LXDE $VERSION"
     return 1
 }
