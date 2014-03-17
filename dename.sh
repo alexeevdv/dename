@@ -48,6 +48,18 @@ function detect_xfce()
     fi
 }
 
+function detect_cinnamon()
+{
+    ps -e | grep cinnamon > /dev/null
+    if [ $? -ne 1 ];
+    then
+	VERSION=`cinnamon --version | awk '{print $2}'`
+	DESKTOP="CINNAMON $VERSION"
+    else
+	DESKTOP="UNKNOWN"
+    fi
+}
+
 detect_gnome
 if [ "$DESKTOP" == "UNKNOWN" ];
 then
@@ -60,7 +72,11 @@ then
 	    detect_xfce
 	    if [ "$DESKTOP" == "UNKNOWN" ];
 	    then
-		echo $DESKTOP > /dev/null
+		detect_cinnamon
+		if [ "$DESKTOP" == "UNKNOWN" ];
+		then
+		    echo $DESKTOP > /dev/null
+		fi
 	    fi
 	fi
     fi
