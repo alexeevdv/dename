@@ -94,7 +94,10 @@ then
 	    then
 		if detect_cinnamon;
 		then
-		    detect_mate;
+		    if detect_mate;
+		    then
+			detect_lxde
+		    fi
 		fi
 	    fi
 	fi
