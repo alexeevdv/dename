@@ -17,3 +17,4 @@ Can detect:
 * XFCE
 * Cinnamon
 * Mate
+* LXDE

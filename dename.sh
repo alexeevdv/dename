@@ -72,6 +72,17 @@ function detect_mate()
     return 1
 }
 
+function detect_lxde()
+{
+    ps -e | grep lxsession > /dev/null
+    if [ $? -ne 0];
+    then
+	return 0
+    fi
+    DESKTOP="LXDE"
+    return 1
+}
+
 DESKTOP="UNKNOWN"
 if detect_gnome;
 then
