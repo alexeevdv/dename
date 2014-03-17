@@ -79,7 +79,9 @@ function detect_lxde()
     then
 	return 0
     fi
-    DESKTOP="LXDE"
+    # For Lubuntu
+    VERSION=`apt-get -s install lxde-core | grep 'Inst lxde-core' | awk -F '(' '{print $2}' | awk -F '-' '{print $1}'`
+    DESKTOP="LXDE $VERSION"
     return 1
 }
 
