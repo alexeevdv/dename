@@ -18,3 +18,8 @@ Can detect:
 * Cinnamon
 * Mate
 * LXDE
+
+Tested in:
+
+* Knoppix 7.0.5
+* Lubuntu 13.10
