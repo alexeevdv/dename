@@ -3,95 +3,87 @@
 function detect_gnome()
 {
     ps -e | grep gnome-session > /dev/null
-    if [ $? -ne 1 ];
+    if [ $? -ne 0 ];
     then
-        VERSION=`gnome-session --version | awk '{print $2}'`
-        DESKTOP="GNOME $VERSION"
-    else
-        DESKTOP="UNKNOWN"
+	return 0
     fi
+    VERSION=`gnome-session --version | awk '{print $2}'`
+    DESKTOP="GNOME $VERSION"
+    return 1
 }
 
 function detect_kde()
 {
     ps -e | grep kdm > /dev/null
-    if [ $? -ne 1 ];
+    if [ $? -ne 0 ];
     then
-        VERSION=`kded4 --version | grep Platform | awk '{print $4}'`
-        DESKTOP="KDE $VERSION"
-    else
-        DESKTOP="UNKNOWN"
+	return 0
     fi
+    VERSION=`kded4 --version | grep Platform | awk '{print $4}'`
+    DESKTOP="KDE $VERSION"
+    return 1
 }
 
 function detect_unity()
 {
     ps -e | grep unity-panel > /dev/null
-    if [ $? -ne 1 ];
+    if [ $? -ne 0 ];
     then
-	VERSION=`unity --version | awk '{print $2}'`
-	DESKTOP="UNITY $VERSION"
-    else
-	DESKTOP="UNKNOWN"
+	return 0
     fi
+    VERSION=`unity --version | awk '{print $2}'`
+    DESKTOP="UNITY $VERSION"
+    return 1
 }
 
 function detect_xfce()
 {
     ps -e | grep xfce4-session > /dev/null
-    if [ $? -ne 1 ];
+    if [ $? -ne 0 ];
     then
-	VERSION=`xfce4-session --version | grep xfce4-session | awk '{print $2}'`
-	DESKTOP="XFCE $VERSION"
-    else
-	DESKTOP="UNKNOWN"
+	return 0
     fi
+    VERSION=`xfce4-session --version | grep xfce4-session | awk '{print $2}'`
+    DESKTOP="XFCE $VERSION"
+    return 1
 }
 
 function detect_cinnamon()
 {
     ps -e | grep cinnamon > /dev/null
-    if [ $? -ne 1 ];
+    if [ $? -ne 0 ];
     then
-	VERSION=`cinnamon --version | awk '{print $2}'`
-	DESKTOP="CINNAMON $VERSION"
-    else
-	DESKTOP="UNKNOWN"
+	return 0
     fi
+    VERSION=`cinnamon --version | awk '{print $2}'`
+    DESKTOP="CINNAMON $VERSION"
+    return 1
 }
 
 function detect_mate()
 {
     ps -e | grep mate-panel > /dev/null
-    if [ $? -ne 1 ];
+    if [ $? -ne 0 ];
     then
-	VERSION=`mate-about --version | awk '{print $4}'`
-	DESKTOP="MATE $VERSION"
-    else
-	DESKTOP="UNKNOWN"
+	return 0
     fi
+    VERSION=`mate-about --version | awk '{print $4}'`
+    DESKTOP="MATE $VERSION"
+    return 1
 }
 
-detect_gnome
-if [ "$DESKTOP" == "UNKNOWN" ];
+DESKTOP="UNKNOWN"
+if detect_gnome;
 then
-    detect_kde
-    if [ "$DESKTOP" == "UNKNOWN" ];
+    if detect_kde;
     then
-        detect_unity
-	if [ "$DESKTOP" == "UNKNOWN" ];
+	if detect_unity;
 	then
-	    detect_xfce
-	    if [ "$DESKTOP" == "UNKNOWN" ];
+	    if detect_xfce;
 	    then
-		detect_cinnamon
-		if [ "$DESKTOP" == "UNKNOWN" ];
+		if detect_cinnamon;
 		then
-		    detect_mate
-		    if [ "$DESKTOP" == "UNKNOWN" ];
-		    then
-			echo $DESKTOP > /dev/null
-		    fi
+		    detect_mate;
 		fi
 	    fi
 	fi
