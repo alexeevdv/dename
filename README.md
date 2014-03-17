@@ -8,3 +8,12 @@ How to use:
 * `wget https://raw.github.com/alexeevdv/dename/master/dename.sh`
 * `chmod +x dename.sh`
 * `./dename.sh`
+
+Can detect:
+
+* Gnome 2, Gnome 3
+* KDE4
+* Ubuntu Unity
+* XFCE
+* Cinnamon
+* Mate
