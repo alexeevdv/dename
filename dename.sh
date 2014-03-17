@@ -60,6 +60,18 @@ function detect_cinnamon()
     fi
 }
 
+function detect_mate()
+{
+    ps -e | grep mate-panel > /dev/null
+    if [ $? -ne 1 ];
+    then
+	VERSION=`mate-about --version | awk '{print $4}'`
+	DESKTOP="MATE $VERSION"
+    else
+	DESKTOP="UNKNOWN"
+    fi
+}
+
 detect_gnome
 if [ "$DESKTOP" == "UNKNOWN" ];
 then
@@ -75,7 +87,11 @@ then
 		detect_cinnamon
 		if [ "$DESKTOP" == "UNKNOWN" ];
 		then
-		    echo $DESKTOP > /dev/null
+		    detect_mate
+		    if [ "$DESKTOP" == "UNKNOWN" ];
+		    then
+			echo $DESKTOP > /dev/null
+		    fi
 		fi
 	    fi
 	fi
