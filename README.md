@@ -18,8 +18,10 @@ Bash script to detect linux desktop environment name and version
 * Cinnamon
 * Mate
 * LXDE
+* Sugar on a Stick
 
 ## Tested in:
 
 * Knoppix 7.0.5
 * Lubuntu 12.04, 12.10, 13.04, 13.10
+* Fedora 20

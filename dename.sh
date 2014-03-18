@@ -100,6 +100,18 @@ function detect_lxde()
     return 1
 }
 
+function detect_sugar()
+{
+    if [ "$DESKTOP_SESSION" == "sugar" ];
+    then
+	VERSION=`python -c "from jarabe import config; print config.version"`
+	DESKTOP="SUGAR $VERSION"
+    else
+	return 0
+    fi
+}
+
+
 DESKTOP="UNKNOWN"
 if detect_gnome;
 then
@@ -113,7 +125,10 @@ then
 		then
 		    if detect_mate;
 		    then
-			detect_lxde
+			if detect_lxde;
+			then
+			    detect_sugar
+			fi
 		    fi
 		fi
 	    fi
