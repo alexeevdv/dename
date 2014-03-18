@@ -27,3 +27,4 @@ Bash script to detect linux desktop environment name and version
 * Knoppix 7.0.5
 * Lubuntu 12.04, 12.10, 13.04, 13.10
 * Fedora 20
+* CentOS 6.5
