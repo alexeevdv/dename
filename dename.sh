@@ -80,8 +80,8 @@ function detect_lxde()
 	return 0
     fi
 
+    # We can detect LXDE version only thru package manager
     which apt-cache > /dev/null 2> /dev/null
-
     if [ $? -ne 0 ];
     then
 	which yum > /dev/null 2> /dev/null
