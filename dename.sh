@@ -2,7 +2,7 @@
 
 function detect_gnome()
 {
-    ps -e | grep gnome-session > /dev/null
+    ps -e | grep -E '^.* gnome-session$' > /dev/null
     if [ $? -ne 0 ];
     then
 	return 0
@@ -14,7 +14,7 @@ function detect_gnome()
 
 function detect_kde()
 {
-    ps -e | grep kdm > /dev/null
+    ps -e | grep -E '^.* kdm$' > /dev/null
     if [ $? -ne 0 ];
     then
 	return 0
@@ -26,7 +26,7 @@ function detect_kde()
 
 function detect_unity()
 {
-    ps -e | grep unity-panel > /dev/null
+    ps -e | grep -E '^.* unity-panel$' > /dev/null
     if [ $? -ne 0 ];
     then
 	return 0
@@ -38,7 +38,7 @@ function detect_unity()
 
 function detect_xfce()
 {
-    ps -e | grep xfce4-session > /dev/null
+    ps -e | grep -E '^.* xfce4-session$' > /dev/null
     if [ $? -ne 0 ];
     then
 	return 0
@@ -50,7 +50,7 @@ function detect_xfce()
 
 function detect_cinnamon()
 {
-    ps -e | grep cinnamon > /dev/null
+    ps -e | grep -E '^.* cinnamon$' > /dev/null
     if [ $? -ne 0 ];
     then
 	return 0
@@ -62,7 +62,7 @@ function detect_cinnamon()
 
 function detect_mate()
 {
-    ps -e | grep mate-panel > /dev/null
+    ps -e | grep -E '^.* mate-panel$' > /dev/null
     if [ $? -ne 0 ];
     then
 	return 0
@@ -74,13 +74,13 @@ function detect_mate()
 
 function detect_lxde()
 {
-    ps -e | grep lxsession > /dev/null
+    ps -e | grep -E '^.* lxsession$' > /dev/null
     if [ $? -ne 0 ];
     then
 	return 0
     fi
     # For Lubuntu and Knoppix
-    VERSION=`apt-cache show lxde-common | grep 'Version:' | awk '{print $2}' | awk -F '-' '{print $1}'`
+    VERSION=`apt-cache show lxde-common /| grep 'Version:' | awk '{print $2}' | awk -F '-' '{print $1}'`
     DESKTOP="LXDE $VERSION"
     return 1
 }
