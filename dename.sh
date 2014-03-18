@@ -89,6 +89,7 @@ function detect_lxde()
 	then
 	    VERSION='UNKNOWN'
 	else
+	    # For Fedora
 	    VERSION=`yum list lxde-common | grep lxde-common | awk '{print $2}' | awk -F '-' '{print $1}'`
 	fi
     else    
