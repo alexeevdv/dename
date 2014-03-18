@@ -8,7 +8,7 @@ function detect_gnome()
 	return 0
     fi
     VERSION=`gnome-session --version | awk '{print $2}'`
-    DESKTOP="GNOME $VERSION"
+    DESKTOP="GNOME"
     return 1
 }
 
@@ -20,7 +20,7 @@ function detect_kde()
 	return 0
     fi
     VERSION=`kded4 --version | grep Platform | awk '{print $4}'`
-    DESKTOP="KDE $VERSION"
+    DESKTOP="KDE"
     return 1
 }
 
@@ -32,7 +32,7 @@ function detect_unity()
 	return 0
     fi
     VERSION=`unity --version | awk '{print $2}'`
-    DESKTOP="UNITY $VERSION"
+    DESKTOP="UNITY"
     return 1
 }
 
@@ -44,7 +44,7 @@ function detect_xfce()
 	return 0
     fi
     VERSION=`xfce4-session --version | grep xfce4-session | awk '{print $2}'`
-    DESKTOP="XFCE $VERSION"
+    DESKTOP="XFCE"
     return 1
 }
 
@@ -56,7 +56,7 @@ function detect_cinnamon()
 	return 0
     fi
     VERSION=`cinnamon --version | awk '{print $2}'`
-    DESKTOP="CINNAMON $VERSION"
+    DESKTOP="CINNAMON"
     return 1
 }
 
@@ -68,7 +68,7 @@ function detect_mate()
 	return 0
     fi
     VERSION=`mate-about --version | awk '{print $4}'`
-    DESKTOP="MATE $VERSION"
+    DESKTOP="MATE"
     return 1
 }
 
@@ -96,7 +96,7 @@ function detect_lxde()
 	# For Lubuntu and Knoppix
 	VERSION=`apt-cache show lxde-common /| grep 'Version:' | awk '{print $2}' | awk -F '-' '{print $1}'`
     fi
-    DESKTOP="LXDE $VERSION"
+    DESKTOP="LXDE"
     return 1
 }
 
@@ -105,7 +105,7 @@ function detect_sugar()
     if [ "$DESKTOP_SESSION" == "sugar" ];
     then
 	VERSION=`python -c "from jarabe import config; print config.version"`
-	DESKTOP="SUGAR $VERSION"
+	DESKTOP="SUGAR"
     else
 	return 0
     fi
@@ -136,4 +136,15 @@ then
     fi
 fi
 
-echo $DESKTOP
+
+if [ "$1" == '-v' ];
+then
+    echo $VERSION
+else
+    if [ "$1" == '-n' ];
+    then
+	echo $DESKTOP
+    else
+	echo $DESKTOP $VERSION
+    fi
+fi
