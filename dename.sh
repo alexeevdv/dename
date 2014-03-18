@@ -79,8 +79,22 @@ function detect_lxde()
     then
 	return 0
     fi
-    # For Lubuntu and Knoppix
-    VERSION=`apt-cache show lxde-common /| grep 'Version:' | awk '{print $2}' | awk -F '-' '{print $1}'`
+
+    which apt-cache > /dev/null 2> /dev/null
+
+    if [ $? -ne 0 ];
+    then
+	which yum > /dev/null 2> /dev/null
+	if [ $? -ne 0 ];
+	then
+	    VERSION='UNKNOWN'
+	else
+	    VERSION=`yum list lxde-common | grep lxde-common | awk '{print $2}' | awk -F '-' '{print $1}'`
+	fi
+    else    
+	# For Lubuntu and Knoppix
+	VERSION=`apt-cache show lxde-common /| grep 'Version:' | awk '{print $2}' | awk -F '-' '{print $1}'`
+    fi
     DESKTOP="LXDE $VERSION"
     return 1
 }
