@@ -19,7 +19,7 @@ function detect_kde()
     then
         return 0
     else    
-        VERSION=`kded4 --version | grep 'KDE: ' | awk '{print $2}'`
+        VERSION=`kded4 --version | grep 'KDE' | awk -F ':' '{print $2}' | awk '{print $2}'`
         DESKTOP="KDE"
         return 1
     fi
