@@ -17,18 +17,9 @@ function detect_kde()
     ps -e | grep -E '^.* kded4$' > /dev/null
     if [ $? -ne 0 ];
     then
-        ps -e | grep -E '^.* kded$' > /dev/null
-        if [ $? -ne 0 ];
-        then
-            return 0
-        else
-            VERSION=`kded --version | grep 'KDE:' | awk '{print $2}' | awk -F '-' '{print $1}'`
-            DESKTOP="KDE"
-            return 1
-        fi
         return 0
     else    
-        VERSION=`kded4 --version | grep Platform | awk '{print $4}'`
+        VERSION=`kded4 --version | grep 'KDE: ' | awk '{print $2}'`
         DESKTOP="KDE"
         return 1
     fi
