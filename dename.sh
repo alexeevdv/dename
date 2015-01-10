@@ -27,7 +27,7 @@ function detect_kde()
 
 function detect_unity()
 {
-    ps -e | grep -E '^.* unity-panel$' > /dev/null
+    ps -e | grep -E 'unity-panel' > /dev/null
     if [ $? -ne 0 ];
     then
 	return 0
@@ -114,11 +114,11 @@ function detect_sugar()
 
 
 DESKTOP="UNKNOWN"
-if detect_gnome;
+if detect_unity;
 then
     if detect_kde;
     then
-	if detect_unity;
+	if detect_gnome;
 	then
 	    if detect_xfce;
 	    then
